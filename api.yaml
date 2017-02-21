@@ -1,0 +1,73 @@
+swagger: '2.0'
+info:
+  title: Blog API
+  description: Minimal blog post API
+  version: "1.0.0"
+
+host: localhost
+
+schemes:
+  - http
+
+basePath: /
+
+produces:
+  - application/json
+
+paths:
+  /post:
+    post:
+      summary: Create blog post
+      tags:
+        - blog
+        - admin
+      responses:
+        201:
+          description: Successfully created post
+        default:
+          description: Error
+          schema:
+            $ref: '#/definitions/Error'
+
+  /posts:
+    get:
+      summary: Array of all posts
+      description: posts (TODO)
+      tags:
+        - blog
+      responses:
+        200:
+          description: An array of blog posts
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Post'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+
+definitions:
+  Post:
+    type: object
+    properties:
+      post_id:
+        type: string
+        description: post id string
+      title:
+        type: string
+        description: title of post
+      body:
+        type: string
+        description: body of post (multiline)
+
+  Error:
+    type: object
+    properties:
+      code:
+        type: integer
+        format: int32
+      message:
+        type: string
+      fields:
+        type: string

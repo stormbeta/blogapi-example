@@ -18,6 +18,7 @@ paths:
   /post:
     post:
       summary: Create blog post
+      operationId: "controllers.default_controller.post_post"
       tags:
         - blog
         - admin
@@ -33,6 +34,7 @@ paths:
     get:
       summary: Array of all posts
       description: posts (TODO)
+      operationId: "controllers.default_controller.posts_get"
       tags:
         - blog
       responses:

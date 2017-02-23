@@ -7,9 +7,14 @@ Minimalist API example, demonstrates the use of the OpenAPI Spec
 
 * Figure out how to write unit tests through connexion/flask
 * Implement REST endpoints
-* setup.py and other python project config
-* Docker setup to ensure this project can be ran regardless of local python version
+* setup.py, virtualenv, and other python project config
+* Docker compose deployment (make sure to use a volume for the db file so it's persistent)
 * Deployment documentation
+
+## Docker run (local)
+
+TODO: Replace with docker-compose.yml file
+`docker build --pull . -t blogapp && docker run -p 5000:5000 --rm -it blogapp`
 
 ##Notes:
 

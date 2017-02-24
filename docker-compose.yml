@@ -1,0 +1,14 @@
+version: '2'
+
+services:
+  blogapi:
+    build:
+      context: .
+    image: blogapi
+    ports:
+      - "8080:8080"
+    volumes:
+      - db:/blogapi/blog.db
+
+volumes:
+  db:

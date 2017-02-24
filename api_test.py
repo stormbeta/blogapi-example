@@ -2,6 +2,7 @@ import flask
 import unittest
 import tempfile
 import json
+import os
 from app import BlogAPI
 
 
@@ -13,6 +14,9 @@ class BlogAPITest(unittest.TestCase):
         with self.blog.app.app_context():
             with self.blog.app.open_resource("init.sql", mode='r') as f:
                 self.blog.get_db().cursor().executescript(f.read())
+
+    def tearDown(self):
+        os.close(self.db)
 
     def test_empty(self):
         resp = self.app.get('/posts')  # type: flask.Response

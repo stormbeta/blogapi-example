@@ -4,18 +4,32 @@
 
 Minimalist API example with Flask
 
-##TODO:
+##Requirements:
 
-* Figure out how to write unit tests through flask
-* setup.py, virtualenv, and other python project config
-* Docker compose deployment (make sure to use a volume for the db file so it's persistent)
-* Deployment documentation
+* Development
+    * Python 3.6
+    * Docker 1.10+
 
-## Run tests
+* Deployment
+    * TODO
+
+## Getting started
+
+TODO: Port python setup wrapper script to something I can open source
+
+### Virtualenv setup
+
+```bash
+virtualenv .virtualenv --python=python3.6
+source .virtualenv/bin/activate
+pip install -r requirements.txt
+```
+
+### Run tests
 
 `python app_test.py`
 
-## Docker run (local)
+### Docker run (local)
 
 Run app on localhost:8080
 `docker-compose build --pull && docker-compose run --rm blogapi`

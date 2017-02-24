@@ -3,12 +3,12 @@ import unittest
 import tempfile
 import json
 import os
-from app import BlogAPI
+import app as blog
 
 
 class BlogAPITest(unittest.TestCase):
     def setUp(self):
-        self.blog = BlogAPI()
+        self.blog = blog
         self.db, self.blog.app.config['DATABASE'] = tempfile.mkstemp()
         self.app = self.blog.app.test_client()
         with self.blog.app.app_context():

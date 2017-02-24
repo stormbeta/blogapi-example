@@ -45,3 +45,7 @@ Originally I wanted to use OpenAPI Spec (aka Swagger) to automatically define th
 ran into snags with some of the supporting frameworks and decided to just use plain Flask.
 I've left the spec file in place though for reference, and in a real project I'd want to use
 it to validate the API.
+
+In a real world project, I'd want at minimum an nginx reverse proxy so that the service
+ran behind HTTPS/TLS, and use a real database running on a separate instance.
+

@@ -15,16 +15,16 @@ class BlogAPITest(unittest.TestCase):
                 self.blog.get_db().cursor().executescript(f.read())
 
     def test_empty(self):
-        resp: flask.Response = self.app.get('/posts')
+        resp = self.app.get('/posts')  # type: flask.Response
         assert resp.status_code == 200
         assert json.loads(resp.data) == []
 
     def test_add(self):
-        resp: flask.Response = self.app.post('/post', data=json.dumps(dict(
+        resp = self.app.post('/post', data=json.dumps(dict(
             post_id="1",
             title="Hello world!",
             body="lorem ipsum"
-        )))
+        )))  # type: flask.Response
         assert resp.status_code == 201
         data = self.app.get('/posts').data
         result = json.loads(data)

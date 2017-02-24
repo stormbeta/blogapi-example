@@ -2,6 +2,10 @@
 
 import os
 import flask
+import sqlite3
+from flask import request
+import json
+
 
 class BlogAPI:
     def __init__(self):
@@ -13,13 +17,26 @@ class BlogAPI:
             PORT=8080,
         ))
 
-        @self.app.route("/post", methods=['POST'])
-        def add_post():
-            return "POST"
+        self.context = self.app.app_context().g
+        self.app.add_url_rule("/post", view_func=self.add_post, methods=['POST'])
+        self.app.add_url_rule("/posts", view_func=self.get_posts(), methods=['GET'])
 
-        @self.app.route("/posts", methods=['GET'])
-        def get_posts():
-            return "GET"
+    def get_posts(self):
+        c = self.get_db().cursor()
+        return json.dumps({list(c.execute("SELECT * FROM posts"))}), 200
+
+    def add_post(self):
+        c = self.get_db().cursor()
+        data = json.loads(request.data)  # TODO: How does flask populate this?
+        c.execute("INSERT INTO posts (post_id, title, body) VALUES (?, ?, ?)",
+                  (data["post_id"], data["title"], data["body"]))
+        self.log.info("Created post '" + data["title"] + "'")
+        return '', 201
+
+    def get_db(self):
+        if not hasattr(self.context, 'blog_db'):
+            self.context.blog_db = sqlite3.connect(self.app.config['DATABASE'])
+        return self.context.blog_db
 
 
 if __name__ == '__main__':

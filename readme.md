@@ -1,5 +1,7 @@
 #Blog Post API Example Project
 
+[![Build Status](https://travis-ci.org/stormbeta/blogapi-example.svg?branch=master)](https://travis-ci.org/stormbeta/blogapi-example)
+
 Minimalist API example with Flask
 
 ##TODO:

@@ -8,7 +8,7 @@ services:
     ports:
       - "8080:8080"
     volumes:
-      - db:/blogapi/blog.db
+      - db:/app/blog.db
 
 volumes:
   db:

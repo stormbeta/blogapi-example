@@ -13,6 +13,10 @@ Minimalist API example with Flask
 
 ### Virtualenv setup
 
+Easy way: `source pyw`
+
+If that doesn't work, create the virtualenv manually:
+
 ```bash
 virtualenv .virtualenv --python=python3
 source .virtualenv/bin/activate
@@ -66,5 +70,3 @@ Originally I wanted to use OpenAPI Spec (aka Swagger) to automatically define th
 ran into snags with some of the supporting frameworks and decided to just use plain Flask.
 I've left the spec file in place though for reference, and in a real project I'd want to use
 it to validate the API.
-
-TODO: Port python setup wrapper script to something I can open source

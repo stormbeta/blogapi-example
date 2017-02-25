@@ -45,4 +45,4 @@ def close_db(error):
 
 
 if __name__ == '__main__':
-    app.run(port=8080)
+    app.run(port=app.config['PORT'])

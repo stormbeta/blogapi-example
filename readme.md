@@ -6,21 +6,15 @@ Minimalist API example with Flask
 
 ##Requirements:
 
-* Development
-    * Python 3.6
-    * Docker 1.10+
-
-* Deployment
-    * TODO
+* Python 2.7+/3.4+
+* Docker 1.10+
 
 ## Getting started
-
-TODO: Port python setup wrapper script to something I can open source
 
 ### Virtualenv setup
 
 ```bash
-virtualenv .virtualenv --python=python3.6
+virtualenv .virtualenv --python=python3
 source .virtualenv/bin/activate
 pip install -r requirements.txt
 ```
@@ -29,10 +23,37 @@ pip install -r requirements.txt
 
 `python app_test.py`
 
-### Docker run (local)
+### Running (local)
 
 Run app on localhost:8080
+
 `docker-compose build --pull && docker-compose run --rm blogapi`
+
+Or run directly:
+
+`python app.py`
+
+### Example
+
+```bash
+$ curl -X POST -H "Content-Type: application/json" http://localhost:8080/post -d '{"post_id": "12", "title": "hello", "body": "lorem ipsum"}' -w '%{http_code}'
+201
+$ curl -X GET http://localhost:8080/posts
+[{"body": "lorem ipsum", "post_id": "12", "title": "hello"}]
+```
+
+## Deployment
+
+Travis automatically runs the unit tests on pushes to master
+
+The docker container should be deployable to any docker-based infrastructure, and can be ran as a background service via compose manually:
+
+`docker-compose run -d -p 8080:8080 blogapi`
+
+In a real-world service, I'd want to front it with nginx for TLS/HTTPS, and
+setup something like a Kubernetes cluster to deploy it into. The database
+would run as a separate container with a persistent volume mount instead of
+just being a local file
 
 ##Notes:
 
@@ -46,6 +67,4 @@ ran into snags with some of the supporting frameworks and decided to just use pl
 I've left the spec file in place though for reference, and in a real project I'd want to use
 it to validate the API.
 
-In a real world project, I'd want at minimum an nginx reverse proxy so that the service
-ran behind HTTPS/TLS, and use a real database running on a separate instance.
-
+TODO: Port python setup wrapper script to something I can open source

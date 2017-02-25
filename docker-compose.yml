@@ -6,9 +6,10 @@ services:
       context: .
     image: blogapi
     ports:
-      - "8080:8080"
+      - ":8080:8080"
     volumes:
-      - db:/app/blog.db
+      - $PWD/blog.db:/app/blog.db
+    #network_mode: host
 
 volumes:
   db:

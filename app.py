@@ -1,24 +1,15 @@
-#!/usr/bin/env python3
-
 import os
-import flask
 import sqlite3
-from flask import request, g
+from flask import request, g, Flask
 import json
 
-
-app = flask.Flask(__name__)
+app = Flask(__name__)
 log = app.logger
 
 app.config.update(dict(
     DATABASE=os.path.join(app.root_path, 'blog.db'),
     PORT=8080,
 ))
-
-# app.add_url_rule("/post", view_func=add_post, methods=['POST'])
-# app.add_url_rule("/posts", view_func=get_posts, methods=['GET'])
-# self.app.teardown_appcontext_funcs.append(self.close_db)
-
 
 @app.route("/posts", methods=['GET'])
 def get_posts():
@@ -40,7 +31,7 @@ def add_post():
     return '', 201
 
 
-def get_db() -> sqlite3.Connection:
+def get_db():  # type: sqlite3.Connection
     if not hasattr(g, 'blog_db'):
         g.blog_db = sqlite3.connect(app.config['DATABASE'])
         g.blog_db.row_factory = sqlite3.Row
